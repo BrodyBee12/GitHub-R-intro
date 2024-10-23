@@ -14,8 +14,8 @@ packages <- c('tidyverse',
               'terra',
               'tmap',
               'rmarkdown',
-              'tigris',
-              'elevatr'
+              'elevatr',
+              'lterdatasampler'
               )
 
 PackageLoad(packages)

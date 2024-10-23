@@ -1,0 +1,50 @@
+---
+title: "Intro-to-github-lesson-1"
+author: "Brody G"
+date: "2024-10-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+source("setup.R")
+```
+
+```{r}
+data("knz_bison")
+view(knz_bison)
+```
+1. Create a new column in the bison dataset that calculates the individual's age at the time of observation.
+```{r}
+knz_bison_age_data <- knz_bison %>%
+  mutate("Age at time of observation" = rec_year - animal_yob) %>% 
+  print(knz_bison_age_data)
+```
+
+2.  Write a function that will first filter the bison dataset based on any user-specified weight threshold (returning the filtered dataset).
+```{r}
+weight_threshold = 1100
+
+knz_bison_filtered_weight_data <- knz_bison %>%
+    filter(animal_weight >= weight_threshold)  # Keep records with weight above the threshold
+  
+print(knz_bison_filtered_weight_data)
+
+```
+
+3.  Create a boxplot showing weight distribution between male and female bison, and then conduct a t-test to see if weight is significantly difference between males and females.
+
+```{r}
+ggplot(knz_bison, aes(x = animal_sex, y = animal_weight, fill = animal_sex)) +
+  geom_boxplot() +
+  labs(title = "Weight Distribution by Sex",
+       x = "Animal Sex",
+       y = "Animal Weight") +
+  theme_bw()
+
+t.test(animal_weight ~ animal_sex, data = knz_bison)
+```
+
+
